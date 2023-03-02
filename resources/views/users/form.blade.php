@@ -1,13 +1,14 @@
-@extends('layout.layout')
+@extends('layouts.app')
 
-@section('title', 'Update user ' . $user->first_name . ' '. $user->last_name)
+@section('title', 'Update user ' . $user->name)
 
-@section('content')
+@section('users')
+<div class="container">
 
     <div class="row">
 
         <div class="pull-right">
-            <a class="btn btn-primary mt-3" href="{{ route('users.index') }}">Back</a>
+            {{--            <a class="btn btn-primary mt-3" href="{{ route('home') }}">Back</a>--}}
         </div>
 
     </div>
@@ -32,16 +33,9 @@
 
         <div class="row">
             <div class="col">
-                <strong>First Name:</strong>
-                <input type="text" name="first_name"
-                       value="{{isset($user) ? $user->first_name : null}}"
-                       class="form-control" aria-label="first_name" placeholder="First Name...">
-            </div>
-
-            <div class="col">
-                <strong>Last Name:</strong>
+                <strong>Name:</strong>
                 <input type="text" name="last_name"
-                       value="{{isset($user) ? $user->last_name : null}}"
+                       value="{{isset($user) ? $user->name : null}}"
                        class="form-control" aria-label="last_name" placeholder="Last Name...">
             </div>
 
@@ -67,4 +61,5 @@
 
         </div>
     </form>
+</div>
 @endsection

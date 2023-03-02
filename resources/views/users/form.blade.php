@@ -8,7 +8,7 @@
     <div class="row">
 
         <div class="pull-right">
-            {{--            <a class="btn btn-primary mt-3" href="{{ route('home') }}">Back</a>--}}
+                        <a class="btn btn-primary mt-3" href="{{ route('users.index') }}">Back</a>
         </div>
 
     </div>
@@ -34,9 +34,9 @@
         <div class="row">
             <div class="col">
                 <strong>Name:</strong>
-                <input type="text" name="last_name"
+                <input type="text" name="name"
                        value="{{isset($user) ? $user->name : null}}"
-                       class="form-control" aria-label="last_name" placeholder="Last Name...">
+                       class="form-control" aria-label="name" placeholder="Name...">
             </div>
 
             <div class="col">

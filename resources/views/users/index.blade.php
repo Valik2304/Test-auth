@@ -14,7 +14,11 @@
                             </div>
                         @endif
 
-                        {{ __('You are logged in!') }}
+                        @if(Auth::user()->role == 1)
+                            {{ __('Hello Admin!') }}
+                        @else
+                            {{ __('Hello Guest!') }}
+                        @endif
                     </div>
                 </div>
             </div>
@@ -64,6 +68,7 @@
                     <th>Phone number</th>
                     <th>Created</th>
                     <th>Updated</th>
+                    <th>Actions</th>
                 </tr>
                 @foreach ($users as $user)
                     <tr>
@@ -76,20 +81,27 @@
 
                         @if( Auth::user()->role  == 1)
                             <td>
-                                <form action="{{ route('users.destroy',$user) }}" method="POST">
+                                <form action="{{ route('users.destroy', $user) }}" method="POST">
                                     <a type="button" class="btn btn-info"
-                                       href="{{ route('users.show',$user) }}">Show</a>
+                                       href="{{ route('users.show', $user) }}">Show</a>
                                     <a type="button" class="btn btn-warning"
-                                       href="{{ route('users.edit',$user) }}">Edit</a>
+                                       href="{{ route('users.edit', $user) }}">Edit</a>
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+
+                                    @if($user->id === Auth::user()->id)
+                                        <button type="submit" class="btn btn-danger" disabled>Delete</button>
+                                    @else
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    @endif
                                 </form>
                             </td>
                         @else
-                            {{null}}
+                            <td>
+                                <a type="button" class="btn btn-info"
+                                   href="{{ route('users.show', $user) }}">Show</a>
+                            </td>
                         @endif
-
 
                     </tr>
                 @endforeach

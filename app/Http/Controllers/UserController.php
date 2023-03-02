@@ -80,7 +80,6 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-//        dd($request->all());
         $user->update($request->only(['name', 'email', 'tel']));
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }

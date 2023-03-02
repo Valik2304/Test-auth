@@ -21,10 +21,6 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-//Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::resource('users', UserController::class);
-Route::get('/users', [UserController::class, 'index'])->name('home');
-Route::get('/users', [UserController::class, 'index']);
+Route::resource('users', UserController::class)->except(['store', 'create']);
 Route::get('/search', [UserController::class, 'search'])->name('search');
 

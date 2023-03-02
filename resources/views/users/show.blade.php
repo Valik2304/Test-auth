@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-right">
-                    {{--                <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>--}}
+                    <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
                 </div>
             </div>
         </div>
@@ -42,12 +42,22 @@
                 </div>
             </div>
 
-            <form action="{{ route('users.destroy',$user) }}" method="POST" class="mt-3">
-                <a type="button" class="btn btn-warning" href="{{ route('users.edit',$user) }}">Edit</a>
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+
+
+            @if($user->role == 1)
+                <form action="{{ route('users.destroy', $user) }}" method="POST" class="mt-3">
+                    <a type="button" class="btn btn-warning" href="{{ route('users.edit', $user) }}">Edit</a>
+                    @csrf
+                    @if($user->id === Auth::user()->id)
+                        <button type="submit" class="btn btn-danger" disabled>Delete</button>
+                    @else
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    @endif
+                </form>
+            @else
+                {{null}}
+            @endif
+
 
         </div>
     </div>
